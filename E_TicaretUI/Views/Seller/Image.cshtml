@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "Image";
+    Layout = "~/Views/Shared/Layout_2.cshtml";
+}
+
+@model E_TicaretUI.Models.ProductImageModelView
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürün Resmi Yükle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+
+            .custom-file-upload:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="hidden" asp-for="name" value="@ViewBag.product"  readonly/>
+                <label for="Image">Resim Dosyası</label>
+                <input type="file" id="Image" asp-for="ımage" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="custom-file-upload">Ekle</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

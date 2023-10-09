@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewData["Title"] = "Seller";
+    Layout = "~/Views/Shared/Layout_2.cshtml";
+}
+@model E_TicaretUI.Models.SellerModelView
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satıcı Kayıt Formu</title>
+
+    <style>
+        /* Temel sayfa stillemesi */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        .seller-form {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Form stillemesi */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+            font-size: 20px;
+        }
+
+
+            /* Hatalı durum için stil */
+            input[type="text"].is-invalid
+            {
+                border-color: #f00;
+            }
+
+            /* Fokuslandığında stil */
+            input[type="text"]:focus
+            {
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            }
+
+        /* Gönder düğmesi stillemesi */
+        .submit-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            .submit-button:hover {
+                background-color: #0056b3;
+            }
+
+        .select-custom {
+            width: 100%; /* Genişliği tamamen doldurur */
+            padding: 10px; /* Kenar boşluğu ekler */
+            border: 1px solid #ccc; /* Kenarlık ekler */
+            border-radius: 4px; /* Köşeleri yuvarlar */
+            background-color: #fff; /* Arka plan rengi */
+            color: #333; /* Yazı rengi */
+        }
+
+            /* Seçeneklerin stilleri */
+            .select-custom option {
+                background-color: #fff; /* Seçenek arka plan rengi */
+                color: #333; /* Seçenek yazı rengi */
+            }
+
+            /* Hatalı durum için stil */
+            .select-custom.is-invalid {
+                border-color: #f00; /* Hatalı durumda kenarlığı kırmızı yapar */
+            }
+
+            /* Fokuslandığında stil */
+            .select-custom:focus {
+                outline: none; /* Fokuslandığında mavi çerçeveyi kaldırır */
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Fokuslandığında hafif bir gölge ekler */
+            }
+            form-group.CompanyType{
+                width:100%;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="POST" class="seller-form">
+            <h1>Satıcı Kayıt Formu</h1>
+            <div class="form-group">
+                <label for="CompanyName">Şirket Adı</label>
+                <input type="text" id="CompanyName" asp-for="CompanyName" required>
+            </div>
+            <div class="form-group">
+                <label for="CompanyType">Şirket Türü</label>
+                <select id="CompanyType" asp-for="CompanyType" class="select-custom" required>
+                    <option disabled="disabled" selected="selected" value="">Seçim yapınız</option>
+                    <option value="PRIVATE">Şahıs</option>
+                    <option value="UNINCORPORATED">Adi Ortaklık</option>
+                    <option value="UNLIMITED_COMPANY">Kollektif Şirket</option>
+                    <option value="UNINCORPORATED_COMMANDITE">Adi Komandit Şirket</option>
+                    <option value="ESH_COMMANDITE">Sermayesi Paylara Bölünmüş Komandit Şirket</option>
+                    <option value="LIMITED">Limited Şirketi</option>
+                    <option value="ANONYM">Anonim Şirket</option>
+                    <option value="COOPERATIVE">Kooperatif Şirket</option>
+                    <option value="OTHER">Diğer</option>
+                    <option value="BUSINESS_PARTNERSHIP">İş Ortaklığı</option>
+                    <option value="ASSOCIATION">Dernek İşletmesi</option>
+                    <option value="FOUNDATION">Vakıf İşletmesi</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="TaxIdentificationNumber">Vergi Kimlik Numarası</label>
+                <input type="text" id="TaxIdentificationNumber" asp-for="TaxIdentificationNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="BusinessAddress">İş Adresi</label>
+                <input type="text" id="BusinessAddress" asp-for="BusinessAddress" required>
+            </div>
+            <div class="form-group">
+                <label for="BankName">Banka Adı</label>
+                <input type="text" id="BankName" asp-for="BankName" required>
+            </div>
+            <div class="form-group">
+                <label for="IBAN">IBAN</label>
+                <input type="text" id="IBAN" asp-for="IBAN" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="submit-button">Başvur</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

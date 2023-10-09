@@ -1,0 +1,54 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Doğrulama Tamamlandı</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .success-message {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .login-button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+            .login-button:hover {
+                background-color: #2980b9;
+            }
+    </style>
+</head>
+<body>
+    <div class="success-message">
+        <h2>Tebrikler, Email Doğrulama İşlemi Başarılı!</h2>
+        <p>Email adresiniz başarıyla doğrulandı. Artık hesabınıza giriş yapabilirsiniz.</p>
+    </div>
+
+    <a href="https://localhost:7005/Account/Login" class="login-button">Giriş Yap</a>
+</body>
+</html>
+

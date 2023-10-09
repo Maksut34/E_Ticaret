@@ -1,0 +1,89 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="navbar.css">
+    <title>Kazanç E-Ticaret</title>
+
+    <style>
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+        }
+
+        li {
+            margin-right: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+            a:hover {
+                color: #f9a825;
+            }
+
+        .user-controls {
+            display: flex;
+            align-items: center;
+        }
+
+            .user-controls a {
+                margin-left: 20px;
+            }
+
+    </style>
+
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h1><a href="#">Kazanç E-Ticaret</a></h1>
+            <ul>
+                <li><a href="https://localhost:7005/Home/Home">Ana Sayfa</a></li>
+                <li><a href="https://localhost:7005/Account/Profile">Hesabım</a></li>
+                <li><a href="#">Kategoriler</a></li>
+                <li><a href="#">Hakkımızda</a></li>
+                <li><a href="#">İletişim</a></li>
+            </ul>
+            <div class="user-controls">
+                <a href="https://localhost:7005/Account/Login">Giriş Yap</a>
+                <a href="https://localhost:7005/Account/Register">Kayıt Ol</a>
+                <a href="https://localhost:7005/Basket/Basket">Sepetim</a>
+            </div>
+        </div>
+    </nav>
+    @RenderBody()
+</body>
+</html>
+

@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewData["Title"] = "Products";
+    Layout = "~/Views/Shared/Layout_2.cshtml";
+}
+@model E_TicaretUI.Models.ProductsModelView
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürün Ekle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ürün Ekle</h1>
+        <form method="post" enctype="multipart/form-data">
+            <label for="Name">Ürün Adı:</label>
+            <input type="text" id="Name" asp-for="name" required>
+
+            <label for="Image">Ürün Resmi</label>
+            <input type="file" id="Image" asp-for="ımage" required>
+            <br />
+
+            <label for="Price">Fiyat:</label>
+            <input type="number" id="Price" asp-for="Price" step="0.01" required>
+
+            <label for="piece">Adet:</label>
+            <input type="number" id="piece" asp-for="piece" step="1" required>
+
+            <label for="Category">Kategori:</label>
+            <input type="text" id="Category" asp-for="category" required>
+
+            <label for="Description">Açıklama:</label>
+            <textarea id="Description" asp-for="Description" rows="4"></textarea>
+
+            <button type="submit">Ekle</button>
+        </form>
+    </div>
+</body>
+</html>

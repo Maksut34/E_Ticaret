@@ -1,0 +1,155 @@
+﻿
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/Layout_1.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kişisel E-Ticaret Profil Sayfası</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+            nav a {
+                text-decoration: none;
+                color: #fff;
+                margin: 0 10px;
+            }
+
+                nav a:hover {
+                    text-decoration: underline;
+                }
+
+        .content {
+            margin: 20px;
+            display: flex; /* Ekranı yatay olarak bölmek için flex kullanıyoruz */
+            justify-content: space-between; /* İçerikleri yatay olarak iki tarafa da yay */
+            align-items: flex-start; /* İçerikleri dikey olarak en üstte hizala */
+        }
+
+        .profile {
+            width: 30%;
+            text-align: center;
+        }
+
+            .profile img {
+                max-width: 100%;
+                border-radius: 50%;
+            }
+
+        .orders {
+            width: 30%;
+            text-align: center;
+        }
+
+        .profile a, .sell-button {
+            display: inline-block;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            margin-top: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+            .profile a:hover, .sell-button:hover {
+                background-color: #555;
+            }
+
+        .orders {
+            float: left;
+            width: 65%;
+            margin-top: 20px;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+            .order-item img {
+                max-width: 80px;
+                margin-right: 10px;
+            }
+
+        .order-details h3 {
+            margin: 0;
+        }
+
+        .delete-button {
+            background-color: #f00;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            margin-left: auto;
+            cursor: pointer;
+        }
+
+            .delete-button:hover {
+                background-color: #d00;
+            }
+    </style>
+</head>
+<body>
+    <section class="content">
+        <div class="profile">
+            <h2>[@ViewBag.name]</h2>
+            
+        </div>
+        <div class="orders">
+            <h2>Siparişleriniz</h2>
+            <br />
+            <div class="order-item">
+                <img src="product1.jpg" alt="Ürün Resmi">
+                <div class="order-details">
+                    <h3>Ürün Adı 1</h3>
+                    <p>Kategori: Kategori 1</p>
+                    <p>Eklenme Tarihi: 01/09/2023</p>
+                    <p>Satıcı: Akna pazarlama</p>
+                </div>
+                <button class="delete-button">Detaylar</button>
+                <button class="delete-button">İptal Et</button>
+            </div>
+            
+        </div>
+        
+        @if (User.Identity.IsAuthenticated)
+        {
+            @if (ViewBag.satcımı == true)
+            {
+                <div>
+                    <a href="https://localhost:7005/Seller/MyProducts" class="sell-button">Ürünlerimi göster</a>
+                </div>
+                <div>
+                    <a href="https://localhost:7005/Seller/Products" class="sell-button">Ürün Sat</a>
+                </div>
+            }
+        }
+        <br />
+        <div>
+            <a href="https://localhost:7005/Seller/Seller" class="sell-button">Pazar mı kurmak istiyorsunuz?</a>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,293 @@
+﻿@{
+   
+    Layout = "~/Views/Shared/Layout_2.cshtml";
+}
+
+
+@model E_TicaretUI.Models.MyProductModelView
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürün Detayı</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .custom-container {
+            text-align: center;
+            padding: 10px; /* Kenar boşluğunu artırmak veya azaltmak için bu değeri ayarlayabilirsiniz */
+            background-color: #f0f0f0; /* Arka plan rengini değiştirmek için bu rengi istediğiniz gibi ayarlayabilirsiniz */
+        }
+
+        .custom-image img {
+            max-width: 50%;
+            height: auto;
+            width: 300px;
+            height: 300px;
+        }
+
+        .tab-container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .tab-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center; /* Butonları merkezle */
+        }
+
+            .tab-nav li {
+                margin-right: 10px;
+            }
+
+                .tab-nav li:last-child {
+                    margin-right: 0;
+                }
+
+            .tab-nav a {
+                text-decoration: none;
+                color: #333;
+                padding: 5px 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+                .tab-nav a:hover {
+                    background-color: #f0f0f0;
+                }
+
+            .tab-nav .active a {
+                background-color: #007bff;
+                color: #fff;
+            }
+
+        .tab-content {
+            margin-top: 20px;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+            .tab-pane.active {
+                display: block;
+            }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 2rem;
+        }
+
+        .gallery-item {
+            margin: 1rem;
+            text-align: center;
+        }
+
+            .gallery-item img {
+                border-radius: 50%;
+                width: 250px;
+                height: 250px;
+                object-fit: cover;
+            }
+
+            .gallery-item h3 {
+                margin: 0.5rem 0;
+            }
+
+        .image_container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Üç sütunlu bir grid oluşturun */
+            gap: 25px; /* Kutular arası boşluk */
+        }
+
+        .form-container {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+            .form-container input[type="email"],
+            .form-container input[type=text],
+            .form-container textarea {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            .form-container button[type="submit"] {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+                .form-container button[type="submit"]:hover {
+                    background-color: #0056b3;
+                }
+
+            /* İletişim formu elemanları arasındaki boşluk */
+            .form-container p {
+                margin-bottom: 10px;
+            }
+
+        .comments-container {
+            margin-top: 20px; /* Yorumların üst boşluğu */
+        }
+
+        /* Her bir yorum */
+        .comment {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="custom-container">
+        <div class="custom-image">
+            <img src="~/lib/img/@Model.ımage" alt="Productimage" />
+        </div>
+    </div>
+    <div class="tab-container">
+        <ul class="tab-nav">
+            <li class="active"><a href="#tab-Açıklama" onclick="showTab('tab-Açıklama')">Açıklama</a></li>
+            <li class="active"><a href="#tab-Bilgiler" onclick="showTab('tab-Bilgiler')">Bilgiler</a></li>
+            <li class="active"><a href="#tab-Resimler" onclick="showTab('tab-Resimler')">Resimler</a></li>
+            <li class="active"><a href="#tab-Satıcıya sor" onclick="showTab('tab-Satıcıya sor')">Satıcıya sor</a></li>
+            <li class="active"><a href="#tab-Yorum yap" onclick="showTab('tab-Yorum yap')">Yorum yap</a></li>
+            <li class="active">
+                <a href="@Url.Action("BasketAdd","Basket", new { productname = Model.name})"
+                   onclick="showTab('tab-Sepete Ekle')">Sepete Ekle</a>
+            </li>
+        </ul>
+        
+        <div class="tab-content">
+            <div id="tab-Açıklama" class="tab-pane">
+                <p>@Model.Description</p>
+            </div>
+            <div id="tab-Bilgiler" class="tab-pane">
+                <input type="hidden" value=""@Model.myProductID />
+                <p>
+                    <b>Ürün adı</b>: @Model.name<br>
+                    <b>Kategorisi</b>: @Model.category <br>
+                    <b>Adet</b>: @Model.piece<br>
+                    <b>Fiyat</b>: @Model.Price<br>
+                </p>
+            </div>
+            <div id="tab-Resimler" class="tab-pane">
+                <div class="image_container">
+                    @foreach (var item in Model.myImages)
+                    {
+                        <div class="gallery-item">
+                            <img src="~/lib/img/@item.ımageUrl">
+                        </div>
+                    }
+                </div>
+            </div>
+            <div id="tab-Satıcıya sor" class="tab-pane">
+                <div class="form-container">
+                    <form method="post">
+                        <input type="hidden" asp-for="questıonProductID" value="@ViewBag.product" />
+                        <input type="email" asp-for="senderemail" placeholder="İletişim için Email giriniz!" />
+                        <textarea type="textarea" asp-for="About" placeholder="Cevabınızı hızlı almak için Sorunuzu mümkün olan en iyi açıklama ile sorunuz!"></textarea>
+                        <button type="submit">Sor</button>
+                    </form>
+                </div>
+            </div>
+            <div id="tab-Yorum yap" class="tab-pane">
+                <div class="form-container">
+                    <form method="post">
+                        <input type="hidden" asp-for="commentproductıd" value="@ViewBag.product" />
+                        <input type="email" asp-for="Customeremail" placeholder="Email giriniz!" />
+                        <input type="text" asp-for="Customerusername" placeholder="Kullanıcı adı giriniz!" />
+                        <textarea type="textarea" asp-for="comment" placeholder="Yorumunuz.."></textarea>
+                        <button type="submit">Yorum yap</button>
+                    </form>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <div class="comments-container">
+                    @foreach (var item in Model.comments)
+                    {
+                        <div class="comment">
+                            <p>@item.Customerusername</p>
+                            <hr>
+                            <p>@item.comment</p>
+                        </div>
+                    }
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+            </div>
+            <button type="button" onclick="addToCart(@Model.myProductID)">Sepete Ekle</button>
+
+<script>
+    function addToCart(productId) {
+        // Ürünü sepete eklemek için AJAX veya başka bir yöntem kullanabilirsiniz.
+        // Sepete ürün eklemek için bir POST isteği yapabilir ve gerekli bilgileri sunucuya iletebilirsiniz.
+        // İşlem başarılı olduktan sonra kullanıcıya bir geri bildirim verebilirsiniz.
+
+        // Örnek olarak jQuery kullanarak bir POST isteği yapabilirsiniz:
+        $.ajax({
+            type: 'POST',
+            url: '/Basket/AddToCart', // Sepete ürün eklemek için uygun bir URL belirleyin.
+            data: { productId: productId },
+            success: function (result) {
+                if (result.success) {
+                    // Ürün sepete başarıyla eklendi, kullanıcıya bilgi verin veya sayfayı yenileyin.
+                    alert('Ürün sepete eklendi.');
+                } else {
+                    // Bir hata oluştu, kullanıcıya hata mesajı verin veya uygun bir işlem yapın.
+                    alert('Ürün sepete eklenirken bir hata oluştu.');
+                }
+            },
+            error: function () {
+                // İstek sırasında bir hata oluştu, kullanıcıya hata mesajı verin veya uygun bir işlem yapın.
+                alert('Ürün sepete eklenirken bir hata oluştu.');
+            }
+        });
+    }
+</script>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // Tüm sekmeleri gizle
+            var tabs = document.querySelectorAll('.tab-pane');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].style.display = 'none';
+            }
+
+            // İlgili sekme içeriğini göster
+            var tab = document.getElementById(tabId);
+            if (tab) {
+                tab.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/Layout_2.cshtml";
+}
+
+
+@model AccountLoginView
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: #191b28;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            width: 400px;
+            text-align: center;
+            color: #fff;
+        }
+
+            .login-container h2 {
+                margin-bottom: 20px;
+                font-size: 28px;
+            }
+
+        .login-form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2b2d3c;
+            color: #fff;
+        }
+
+        .login-form button {
+            background-color: #ff5e3a;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .login-form button:hover {
+                background-color: #d63617;
+            }
+
+        .forgot-password {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #8e8e8e;
+        }
+
+        .signup-link {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <div class="validation-summary-errors">
+            <ul>
+                @foreach (var modelState in ViewData.ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        <li>@error.ErrorMessage</li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="text-white" asp-validation-summary="ModelOnly"></div>
+        <br />
+        <form class="login-form" action="#" method="post">
+            @Html.AntiForgeryToken()
+
+            <input type="text" asp-for="Email" placeholder="Username">
+            <input type="password" asp-for="Password" placeholder="Password">
+            <div>
+                <label><input type="checkbox" name="RememberMe"> Remember Me</label>
+            </div>
+            <div class="forgot-password">
+                <a href="#">Şifrenizi mi unuttunuz?</a>
+            </div>
+            <div class="signup-link">
+                <p>Hesabınız yok mu? <a href="https://localhost:7005/Account/Register">Hemen Kaydolun</a></p>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

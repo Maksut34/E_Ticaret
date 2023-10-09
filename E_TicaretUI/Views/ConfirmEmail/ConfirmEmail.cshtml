@@ -1,0 +1,92 @@
+﻿
+@{
+    Layout = null;
+}
+
+@using E_TicaretUI.Models
+@model ConfirmEmail
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send the code</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f6f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .send-the-code-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 350px;
+            text-align: center;
+        }
+
+            .send-the-code-container h2 {
+                margin-bottom: 20px;
+                color: #333;
+            }
+
+        .send-the-code-form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .send-the-code-form button {
+            background-color: #333;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .send-the-code-form button:hover {
+                background-color: #555;
+            }
+
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="send-the-code-container">
+
+        <h2>Welcome!</h2>
+
+        <form method="post">
+            <br />
+            <h6>@ViewBag.Email</h6>
+            <br />
+            <input class="form-control" asp-for="ID" value="@ViewBag.ID" readonly>
+            <br />
+            <p>Help us ensure the security of your email address by confirming that it belongs to you. An email containing a confirmation code has been sent to your account. Please enter the code below:</p>
+            <hr>
+            <input type="text" class="form-control" asp-for="ConfirmEmailCode" placeholder="Kodu buraya yazın!">
+            <button class="btn btn-primary" type="submit">Onayla</button>
+        </form>
+    </div>
+</body>
+</html>

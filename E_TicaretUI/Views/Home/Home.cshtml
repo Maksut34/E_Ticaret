@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "MyProducts";
+    Layout = "~/Views/Shared/Layout_2.cshtml";
+}
+
+@model E_TicaretUI.Models.Products
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kişisel E-Ticaret Profil Sayfası</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            margin: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .orders {
+            width: 65%; /* Width değeri düzeltilmiş */
+            margin-top: 20px;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+            .order-item img {
+                max-width: 80px;
+                margin-right: 10px;
+            }
+
+        .order-details h3 {
+            margin: 0;
+        }
+
+        .delete-a {
+            background-color: #f00;
+            color: #fff; /* Yazı rengi ekledik */
+            border: none;
+            padding: 5px 10px;
+            margin-left: auto;
+            cursor: pointer;
+            text-decoration: none; /* Yazı altı çizgisi kaldırıldı */
+        }
+
+            .delete-a:hover {
+                background-color: #d00;
+            }
+    </style>
+
+</head>
+<body>
+    <section class="content">
+        <div class="orders">
+            <br />
+            @foreach (var item in Model.myProducts)
+            {
+                <div class="order-item">
+                    <img src="~/lib/img/@item.ımage" alt="Ürün Resmi">
+                    <div class="order-details">
+                        <h3>@item.name</h3>
+                        <p>Kategori: @item.category</p>
+                        <p>Adet: @item.piece</p>
+                        <p>Fiyat: @item.Price</p>
+                    </div>
+                    <a href="@Url.Action("Detail", "Seller", new { productId = item.ID })" class="delete-a">Detaylar</a>
+                    <a href="@Url.Action("BasketAdd", "Basket", new { productname = item.name })" class="delete-a">Sepete ekle</a> <!-- class eklendi -->
+                </div>
+            }
+        </div>
+    </section>
+</body>
+</html>

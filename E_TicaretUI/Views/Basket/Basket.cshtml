@@ -1,0 +1,171 @@
+﻿@{
+    ViewData["Title"] = "Basket";
+    Layout = "~/Views/Shared/Layout_1.cshtml";
+}
+
+@model E_TicaretUI.Models.BasketModelView
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>E-Ticaret Sepeti</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* Header */
+        header {
+            background-color: #ff6600;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ana bölüm */
+        main {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 1200px;
+            background-color: white;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        /* Sepet öğeleri */
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+            .cart-item img {
+                max-width: 100px;
+                margin-right: 20px;
+            }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .product-price {
+            font-weight: bold;
+            font-size: 16px;
+            margin: 5px 0;
+            color: #ff6600;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-button {
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        /* Sepet özeti ve ödeme bilgileri */
+        .checkout {
+            background-color: white;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 1200px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .order-summary {
+            text-align: right;
+        }
+
+        .total-price {
+            font-weight: bold;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .shipping-cost {
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* İndirim kodu giriş alanı ve onay düğmesi */
+        .apply-button {
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <h1>Sepetim:@ViewBag.productcount</h1>
+    </header>
+
+    <main>
+        <section class="cart">
+            @foreach (var item in ViewBag.Basket)
+            {
+                <div class="cart-item">
+                    <img src="~/lib/img/@item.productımage" alt="Ürün Resmi">
+                    <div class="product-info">
+                        <h2 class="product-title">@item.prductname</h2>
+                        <p class="product-price">@item.productprice</p>
+                        <div class="quantity">
+                            <a class="quantity-button" href="@Url.Action("Add_Decrease","Basket", new { productprice = @item.productprice })" onclick="decrementQuantity()">-</a>
+                            <span class="quantity-value">@item.productpiece</span>
+                            <a class="quantity-button" href="@Url.Action("Add_Decrease","Basket", new { productname = @item.prductname })" onclick="incrementQuantity()">+</a>
+                        </div>
+                    </div>
+                    <a class="quantity-button" href="@Url.Action("Delete","Basket", new { productname = @item.prductname })" onclick="removeFromCart()">Hepsini Kaldır</a>
+                </div>
+            }
+        </section>
+    </main>
+
+    <section class="checkout">
+        <h2>Sepeti Onayla</h2>
+        <div class="order-summary">
+            <p>Ürünün Toplamı</p>
+            <p class="total-price">@ViewBag.totalproductprice</p>
+            <p>Toplam</p>
+            <p class="shipping-cost">@ViewBag.totalprice</p>
+            <p>Kargo</p>
+            <p class="shipping-cost">@ViewBag.cargo</p>
+            <button class="apply-button" onclick="confirmBasket()">Sepeti Onayla</button>
+        </div>
+    </section>
+
+   
+</body>
+</html>
